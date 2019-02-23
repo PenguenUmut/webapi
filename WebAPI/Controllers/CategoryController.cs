@@ -39,7 +39,16 @@ namespace WebAPI.Controllers
         // PUT: api/Category/5
         public void Put(int id, [FromBody]Category value)
         {
-            categories.Where(x => x.id == id).Select(x => { return value; }).ToList();
+            foreach (var c in categories)
+            {
+                if (c.id == id)
+                {
+                    c.code = value.code;
+                    c.name = value.name;
+                    c.desc = value.desc;
+                }
+            }
+            // categories = categories.Where(x => x.id == id).Select(x => { return value; }).ToList();
         }
 
         // DELETE: api/Category/5
